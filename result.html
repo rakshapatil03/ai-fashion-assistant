@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fashion Suggestions</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container result-page">
+    <h1>🧠 AI Fashion Suggestions</h1>
+    {% if image_url %}
+      <img src="{{ image_url }}" alt="Uploaded Outfit" class="preview-img">
+    {% endif %}
+    <div class="ai-suggestions">
+      {{ suggestions | safe }}
+    </div>
+    <a href="/" class="back-btn">🔙 Try Another</a>
+  </div>
+</body>
+</html>

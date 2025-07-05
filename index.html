@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AI Fashion Assistant</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>👗 AI Fashion Assistant</h1>
+    <form action="/result" method="post" enctype="multipart/form-data">
+      <label for="image">📸 Upload Your Outfit:</label>
+      <input type="file" name="image" id="image" required>
+
+      <label for="voice_input">🎤 Describe what you want (via voice):</label>
+      <div class="voice-input-box">
+        <input type="text" name="voice_input" id="voice_input" placeholder="Click the mic and speak..." required>
+        <button type="button" onclick="startListening()">🎙️</button>
+      </div>
+
+      <button type="submit">Generate Suggestions</button>
+    </form>
+  </div>
+
+  <script>
+    function startListening() {
+      const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+      recognition.lang = 'en-US';
+      recognition.onresult = function (event) {
+        document.getElementById('voice_input').value = event.results[0][0].transcript;
+      };
+      recognition.start();
+    }
+  </script>
+</body>
+</html>
